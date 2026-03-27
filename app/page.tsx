@@ -1,123 +1,101 @@
-import { ArrowRight, CheckCircle2, LayoutDashboard, Send, Users, Zap, Quote } from "lucide-react";
-import Link from "next/link";
+import Link from 'next/link'
+import { ArrowRight, Sparkles, LayoutDashboard, Zap } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-purple-500/30">
+    <div className="flex flex-col min-h-screen bg-black text-white selection:bg-blue-500/30">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full border-b border-white/5 bg-black/50 backdrop-blur-xl z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-lg flex items-center justify-center font-bold text-lg">S</div>
-            <span className="text-xl font-bold tracking-tight">SoloCRM</span>
+      <nav className="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-neutral-900/50">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center">
+            <span className="text-white font-bold text-xl leading-none">S</span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <a href="#features" className="hover:text-white transition-colors">Features</a>
-            <a href="#ia" className="hover:text-white transition-colors">AI Engine</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium hover:text-white transition-colors">Login</Link>
-            <Link href="/signup" className="px-4 py-2 bg-white text-black rounded-full text-sm font-bold hover:bg-zinc-200 transition-colors">
-              Get Started
-            </Link>
-          </div>
+          <span className="text-xl font-bold tracking-tight">SoloCRM</span>
+        </div>
+        <div className="flex items-center gap-6 text-sm font-medium">
+          <Link href="/login" className="text-neutral-400 hover:text-white transition-colors">
+            Connexion
+          </Link>
+          <Link 
+            href="/register" 
+            className="bg-white text-black px-4 py-2 rounded-full hover:bg-neutral-200 transition-colors"
+          >
+            Commencer
+          </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/20 blur-[120px] -z-10 rounded-full" />
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-bold mb-8 animate-fade-in">
-            <Zap size={14} />
-            L'IA AU SERVICE DES FREELANCES
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9]">
-            GÉRER SON ACTIVITÉ <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              SANS STRESS.
-            </span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 mb-10">
-            Le CRM intelligent pour freelances qui centralise vos prospects, automatise vos relances et génère vos devis en un clic grâce à l'IA.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup" className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold flex items-center justify-center gap-2 hover:scale-105 transition-transform">
-              Commencer Gratuitement <ArrowRight size={18} />
-            </Link>
-            <Link href="#demo" className="w-full sm:w-auto px-8 py-4 bg-zinc-900 border border-white/10 rounded-full font-bold hover:bg-zinc-800 transition-colors">
-              Voir la démo
-            </Link>
-          </div>
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 lg:px-8 max-w-7xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-8 border border-blue-500/20">
+          <Sparkles className="w-4 h-4" />
+          <span>Le CRM nouvelle génération pour les freelances</span>
         </div>
-      </section>
+        
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-500 max-w-4xl mx-auto mb-8 leading-tight">
+          Gérez votre activité solo avec une élégance inégalée.
+        </h1>
+        
+        <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+          SoloCRM allie un design raffiné à une IA puissante pour vous aider à gérer vos prospects, vos clients et à générer des propositions gagnantes en quelques secondes.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <Link 
+            href="/register" 
+            className="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-full font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-lg"
+          >
+            Essai gratuit
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+          <Link 
+            href="/login" 
+            className="w-full sm:w-auto bg-neutral-900 text-white px-8 py-4 rounded-full font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center border border-neutral-800 text-lg"
+          >
+            Accéder au Dashboard
+          </Link>
+        </div>
 
-      {/* Features Grid */}
-      <section id="features" className="py-24 px-6 bg-zinc-950/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Users className="text-purple-500" />}
-              title="Gestion Prospects"
-              description="Suivez vos opportunités commerciales de 'Nouveau' à 'Gagné' avec un pipeline visuel simple."
-            />
-            <FeatureCard 
-              icon={<Quote className="text-blue-500" />}
-              title="Devis Assistés par IA"
-              description="Décrivez le projet, l'IA génère la structure, les tâches et une suggestion de prix cohérente."
-            />
-            <FeatureCard 
-              icon={<Send className="text-emerald-500" />}
-              title="Relances Automatiques"
-              description="Ne perdez plus jamais un prospect. Recevez des notifications intelligentes pour vos relances."
-            />
+        {/* Aperçu du Dashboard */}
+        <div className="mt-20 w-full max-w-5xl mx-auto rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl relative group">
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-60" />
+          <img 
+            src="/dashboard-preview.png" 
+            alt="Aperçu du Dashboard SoloCRM" 
+            className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        {/* Fonctionnalités */}
+        <div className="grid md:grid-cols-3 gap-8 w-full mt-32 text-left">
+          <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
+            <div className="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mb-6">
+              <LayoutDashboard className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3">Pipeline Intuitif</h3>
+            <p className="text-neutral-400">Suivez vos prospects visuellement du premier contact au contrat signé avec notre tableau Kanban.</p>
+          </div>
+          <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
+            <div className="w-12 h-12 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mb-6">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3">Propositions IA</h3>
+            <p className="text-neutral-400">Générez des propositions de projet professionnelles et persuasives en quelques secondes grâce à l'IA.</p>
+          </div>
+          <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
+            <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center mb-6">
+              <Zap className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3">Vitesse Éclair</h3>
+            <p className="text-neutral-400">Basé sur Next.js App Router pour des temps de chargement instantanés et une interface réactive.</p>
           </div>
         </div>
-      </section>
-
-      {/* Dashboard Preview Overlay */}
-      <section className="py-24 px-6 relative">
-        <div className="max-w-5xl mx-auto bg-gradient-to-b from-zinc-900 to-black border border-white/10 rounded-3xl p-4 shadow-2xl shadow-purple-500/10">
-           <div className="flex items-center gap-2 mb-4 px-4 py-2 border-b border-white/5">
-              <div className="w-3 h-3 rounded-full bg-red-500/50" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-              <div className="w-3 h-3 rounded-full bg-green-500/50" />
-              <span className="text-xs text-zinc-600 ml-4">solo-crm.vercel.app/dashboard</span>
-           </div>
-           <div className="aspect-[16/9] bg-black/50 rounded-xl overflow-hidden flex flex-col items-center justify-center p-8 text-center">
-              <LayoutDashboard size={48} className="text-zinc-800 mb-4" />
-              <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase italic">Pipeline Visualisation Preview</p>
-           </div>
-        </div>
-      </section>
+      </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-white text-black rounded flex items-center justify-center font-bold text-sm">S</div>
-            <span className="text-lg font-bold">SoloCRM</span>
-          </div>
-          <p className="text-zinc-600 text-sm italic">© 2026 SoloCRM – Propulsé par l'IA.</p>
-          <div className="flex gap-6 text-zinc-400">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-          </div>
-        </div>
+      <footer className="border-t border-neutral-900/50 py-12 text-center text-neutral-500 text-sm">
+        <p>© {new Date().getFullYear()} SoloCRM. Tous droits réservés.</p>
       </footer>
     </div>
-  );
-}
-
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
-  return (
-    <div className="p-8 rounded-3xl border border-white/5 bg-zinc-900/50 hover:bg-zinc-900 transition-colors group">
-      <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:border-purple-500/50 transition-colors">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-zinc-500 leading-relaxed">{description}</p>
-    </div>
-  );
+  )
 }
