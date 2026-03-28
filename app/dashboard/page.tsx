@@ -1,35 +1,58 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Users, FolderKanban, TrendingUp, UserSquare2 } from 'lucide-react'
+import { createClient } from '@/utils/supabase/server'
 
-// Dummy data for now
-const stats = [
-  {
-    title: 'Total Prospects',
-    value: '24',
-    icon: Users,
-    change: '+12% depuis le mois dernier',
-  },
-  {
-    title: 'Clients Actifs',
-    value: '12',
-    icon: UserSquare2,
-    change: '+2 nouveaux cette semaine',
-  },
-  {
-    title: 'Projets en cours',
-    value: '8',
-    icon: FolderKanban,
-    change: '3 approchent de la fin',
-  },
-  {
-    title: 'Valeur du Pipeline',
-    value: '45 200 €',
-    icon: TrendingUp,
-    change: '+5 000 € depuis le mois dernier',
-  },
-]
+export default async function DashboardPage() {
+  const supabase = await createClient()
 
-export default function DashboardPage() {
+  // Fetch real counts
+  const { count: prospectsCount } = await supabase
+    .from('prospects')
+    .select('*', { count: 'exact', head: true })
+
+  const { count: clientsCount } = await supabase
+    .from('clients')
+    .select('*', { count: 'exact', head: true })
+
+  const { count: projectsCount } = await supabase
+    .from('projects')
+    .select('*', { count: 'exact', head: true })
+
+  // Calculate pipeline value (sum of 'value' from prospects)
+  const { data: prospectsData } = await supabase
+    .from('prospects')
+    .select('value')
+    .not('value', 'is', null)
+
+  const pipelineValue = prospectsData?.reduce((acc, curr) => acc + (curr.value || 0), 0) || 0
+
+  const stats = [
+    {
+      title: 'Total Prospects',
+      value: prospectsCount?.toString() || '0',
+      icon: Users,
+      change: 'Données en temps réel',
+    },
+    {
+      title: 'Clients Actifs',
+      value: clientsCount?.toString() || '0',
+      icon: UserSquare2,
+      change: 'Mis à jour à l\'instant',
+    },
+    {
+      title: 'Projets en cours',
+      value: projectsCount?.toString() || '0',
+      icon: FolderKanban,
+      change: 'Suivi de vos contrats',
+    },
+    {
+      title: 'Valeur du Pipeline',
+      value: `${new Intl.NumberFormat('fr-FR').format(pipelineValue)} €`,
+      icon: TrendingUp,
+      change: 'Somme des prospects qualifiés',
+    },
+  ]
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Vue d'ensemble</h1>
@@ -59,18 +82,18 @@ export default function DashboardPage() {
             <CardTitle>Activité Récente</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <p className="text-sm text-neutral-400">Chargement du flux d'activité...</p>
+            <div className="space-y-4 text-center py-8">
+              <p className="text-sm text-neutral-400">Le flux d'activité sera disponible dès vos premières actions.</p>
             </div>
           </CardContent>
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>Échéances à venir</CardTitle>
+            <CardTitle>Raccourcis</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <p className="text-sm text-neutral-400">Chargement des échéances...</p>
+              <p className="text-sm text-neutral-400 italic">"Gérez votre entreprise avec simplicité."</p>
             </div>
           </CardContent>
         </Card>
